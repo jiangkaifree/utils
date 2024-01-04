@@ -1,0 +1,17 @@
+{
+  "name": "@jiangkai/utils",
+  "version": "1.0.0",
+  "description": "A Utils Function",
+  "main": "index.js",
+  "scripts": {
+    "build": "rollup --config rollup.config.ts --configPlugin @rollup/plugin-typescript"
+  },
+  "author": "xiaocaiji",
+  "license": "ISC",
+  "dependencies": {
+    "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-terser": "^0.4.4",
+    "@rollup/plugin-typescript": "^11.1.5",
+    "rollup": "^4.9.2"
+  }
+}

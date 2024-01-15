@@ -1,16 +1,22 @@
 /**是否包含中文正则 */
-export const chineseTextReg = /^[^\u4e00-\u9fa5]+$/;
+export const CHINESE = /^[^\u4e00-\u9fa5]+$/;
 
 // 密码正则包含大小写字母，特殊字符， 数字中两种
-export const passwordReg =
+export const PASSWORD =
   /^(?![a-zA-Z]+$)(?![A-Z0-9]+$)(?![A-Z\W_!@#$%^&*`~()-+=]+$)(?![a-z0-9]+$)(?![a-z\W_!@#$%^&*`~()-+=]+$)(?![0-9\W_!@#$%^&*`~()-+=]+$)[a-zA-Z0-9\W_!@#$%^&*`~()-+=]/;
 
-/**手机号正则 */
-export const phoneReg = /^1[0-9]{10}$/;
+/**
+ * @name 手机号正则
+ */
+export const PHONE = /^1[0-9]{10}$/;
 
 /**邮箱正则 */
-export const emailReg =
+export const EMAIL =
   /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/g;
 
 /**是否包含特殊字符 */
-export const specialChars = /[`~!@#$%^&*()_+<>?:"{},.\/;'[\]]/im;
+export const CHARS = /[`~!@#$%^&*()_+<>?:"{},.\/;'[\]]/im;
+
+/**版本正则 例如： X.Y.Z*/
+export const VERSION = /^\d+(?:\.\d+){2}$/
+

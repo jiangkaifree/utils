@@ -13,23 +13,14 @@ const TerserOptions = {
 }
 
 export default defineConfig([
-    // build npm
   {
     input: 'src/index.ts',
     output: {
       dir: 'dist',
       format: 'umd',
-      name: 'Ukey',
+      name: 'utils',
       plugins: [terser(TerserOptions), commonjs()],
     },
     plugins: [ts()],
   },
-    // build a js file
-  // {
-  //   input: 'src/index.ts',
-  //   output: [
-  //     { file: 'utils.js', format: 'cjs', plugins: [terser(TerserOptions), commonjs()] },
-  //   ],
-  //   plugins: [ts()],
-  // },
 ]);

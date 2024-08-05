@@ -24,7 +24,7 @@ $ pnpm dev
 
 ```bash
 # 编译前项目检测
-$ pnpm doctor`
+$ pnpm doctor
 
 #编译项目文档
 $ pnpm docs:build

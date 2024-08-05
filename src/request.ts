@@ -1,8 +1,3 @@
-import { Modal, message } from "antd";
-
-const BASEURL = "/api";
-// process.env.NODE_ENV === "development" ? window.location.origin + "/api" : "/api";
-
 interface FetchHeaders {
   headers?: {
     Accept?: string;
@@ -11,7 +6,7 @@ interface FetchHeaders {
   };
   signal?: AbortSignal;
   method?: "GET" | "POST";
-  body?: string;
+  body?: FormData | Record<string, unknown>;
   timeout?: number;
   credentials?: "include" | "same-origin";
   mode?: "cors" | "same-origin";
@@ -20,16 +15,11 @@ interface FetchHeaders {
 
 export const request = async (
   url: string,
-  options: HeadersInit,
+  options: FetchHeaders,
   header?: Record<string, unknown>
 ): Promise<any> => {
   const { body } = options;
   const token = sessionStorage.getItem("token");
-
-  // console.log(body instanceof FormData, "body");
-  const defaultOptions = {
-    Authorization: token ?? "",
-  };
   let newHeaders;
   if (body instanceof FormData) {
     newHeaders = Object.assign(defaultOptions, header);
@@ -41,10 +31,10 @@ export const request = async (
   const headers = new Headers(newHeaders);
   const response = await fetch(`${BASEURL}${url}`, {
     ...options,
+    body: JSON.stringify(body),
     headers,
   });
   if (response.ok === true) {
-    const responseHeader = response.headers.get("content-type");
     // console.log(responseHeader, "header");
     try {
       // 解析json
@@ -59,28 +49,16 @@ export const request = async (
             return res;
           case 401:
             // 去登录
-            Modal.destroyAll();
-            Modal.info({
-              title: "登录过期",
-              okText: "确定",
-              content: "登录信息已过期，请重新登录",
-              onOk: () => {
-                window.location.href = "/login";
-              },
-            });
+
           default:
             return res;
         }
       }
     } catch (err) {
       // 解析 Blob
-      console.log("response blob", response);
-      const blob = await response.blob();
-      return blob;
+      return await response.blob();
     }
   } else {
-    // fail
-    message.error("请求失败");
     return null;
   }
 };
